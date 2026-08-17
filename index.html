@@ -25,26 +25,42 @@
       overflow-x: hidden;
     }
 
+    /* LUEURS FUTURISTES */
+
     .glow {
       position: fixed;
-      width: 250px;
-      height: 250px;
+      width: 280px;
+      height: 280px;
       border-radius: 50%;
       background: #6c63ff;
-      filter: blur(120px);
-      opacity: 0.2;
+      filter: blur(130px);
+      opacity: 0.22;
       z-index: -1;
+      animation: floatGlow 8s ease-in-out infinite alternate;
     }
 
     .glow.one {
       top: 5%;
-      left: -100px;
+      left: -120px;
     }
 
     .glow.two {
       bottom: 5%;
-      right: -100px;
+      right: -120px;
+      animation-delay: 2s;
     }
+
+    @keyframes floatGlow {
+      from {
+        transform: translateY(-20px);
+      }
+
+      to {
+        transform: translateY(40px);
+      }
+    }
+
+    /* ÉCRANS */
 
     .screen {
       min-height: 100vh;
@@ -54,6 +70,19 @@
       justify-content: center;
       text-align: center;
       padding: 30px;
+      animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .small {
@@ -64,9 +93,22 @@
     }
 
     h1 {
-      font-size: clamp(45px, 15vw, 90px);
+      font-size: clamp(42px, 14vw, 90px);
       letter-spacing: 8px;
       margin-bottom: 15px;
+      animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      from {
+        text-shadow: 0 0 5px rgba(255,255,255,0.2);
+      }
+
+      to {
+        text-shadow:
+          0 0 15px rgba(120,110,255,0.7),
+          0 0 40px rgba(120,110,255,0.3);
+      }
     }
 
     .subtitle {
@@ -76,17 +118,19 @@
       margin-bottom: 40px;
     }
 
+    /* BOUTONS */
+
     button {
       padding: 15px 30px;
-      border: 1px solid rgba(255,255,255,0.4);
+      border: 1px solid rgba(255,255,255,0.35);
       border-radius: 50px;
-      background: rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.07);
       color: white;
       font-size: 12px;
       letter-spacing: 2px;
       cursor: pointer;
-      backdrop-filter: blur(10px);
-      transition: 0.3s;
+      backdrop-filter: blur(12px);
+      transition: all 0.35s ease;
     }
 
     button:hover {
@@ -95,8 +139,35 @@
       transform: scale(1.05);
     }
 
+    /* BOUTON MUSIQUE */
+
+    #musicButton {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      width: 45px;
+      height: 45px;
+      padding: 0;
+      border-radius: 50%;
+      font-size: 18px;
+      display: none;
+    }
+
+    /* CACHÉ */
+
     .hidden {
       display: none;
+    }
+
+    /* MESSAGE */
+
+    .message {
+      max-width: 600px;
+      line-height: 1.9;
+      font-size: 16px;
+      opacity: 0.85;
+      margin: 25px 0 40px;
     }
 
     /* GALERIE */
@@ -140,7 +211,7 @@
       width: 100%;
       height: 420px;
       object-fit: cover;
-      transition: transform 0.6s ease;
+      transition: transform 0.7s ease;
     }
 
     .photo-card:hover img {
@@ -159,18 +230,25 @@
       letter-spacing: 2px;
     }
 
-    .message {
-      max-width: 600px;
-      line-height: 1.9;
-      font-size: 16px;
-      opacity: 0.85;
-      margin: 25px 0 40px;
-    }
+    /* SURPRISE */
 
     .surprise {
       margin-top: 30px;
       font-size: 28px;
       line-height: 1.6;
+      animation: surpriseAppear 1.5s ease;
+    }
+
+    @keyframes surpriseAppear {
+      from {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     .footer {
@@ -184,8 +262,21 @@
 
 <body>
 
+  <!-- LUEURS -->
+
   <div class="glow one"></div>
   <div class="glow two"></div>
+
+
+  <!-- MUSIQUE -->
+
+  <audio id="backgroundMusic" loop>
+    <source src="audio/birthday.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="musicButton" onclick="toggleMusic()">
+    🔊
+  </button>
 
 
   <!-- INTRODUCTION -->
@@ -259,7 +350,6 @@
       THREE MOMENTS • ONE STORY
     </div>
 
-
     <div class="gallery">
 
       <div class="photo-card">
@@ -278,7 +368,6 @@
       </div>
 
     </div>
-
 
     <button onclick="showFinalMessage()" style="margin-top:45px;">
       CONTINUE →
@@ -299,7 +388,11 @@
 
     <p class="message">
       Alliance, je te souhaite une magnifique nouvelle année
-      de vie. Que chaque nouvelle étape t'apporte de belles
+      de vie.
+
+      <br><br>
+
+      Que chaque nouvelle étape t'apporte de belles
       surprises, de la réussite et surtout beaucoup de bonheur.
 
       <br><br>
@@ -313,6 +406,7 @@
     </button>
 
     <div id="surprise" class="hidden surprise">
+
       ✨ 🎂 ✨
 
       <br><br>
@@ -320,6 +414,7 @@
       <strong>
         THE BEST IS YET TO COME.
       </strong>
+
     </div>
 
   </section>
@@ -327,13 +422,44 @@
 
   <script>
 
+    const music = document.getElementById("backgroundMusic");
+    const musicButton = document.getElementById("musicButton");
+
+
     function startExperience() {
 
       document.getElementById("intro").classList.add("hidden");
 
       document.getElementById("birthday").classList.remove("hidden");
 
+      musicButton.style.display = "block";
+
+      music.volume = 0.35;
+
+      music.play().catch(() => {
+        console.log("La lecture automatique a été bloquée.");
+      });
+
       window.scrollTo(0, 0);
+    }
+
+
+    function toggleMusic() {
+
+      if (music.paused) {
+
+        music.play();
+
+        musicButton.innerHTML = "🔊";
+
+      } else {
+
+        music.pause();
+
+        musicButton.innerHTML = "🔇";
+
+      }
+
     }
 
 
@@ -344,6 +470,7 @@
       document.getElementById("gallery").classList.remove("hidden");
 
       window.scrollTo(0, 0);
+
     }
 
 
@@ -354,12 +481,14 @@
       document.getElementById("final").classList.remove("hidden");
 
       window.scrollTo(0, 0);
+
     }
 
 
     function showSurprise() {
 
       document.getElementById("surprise").classList.remove("hidden");
+
     }
 
   </script>
