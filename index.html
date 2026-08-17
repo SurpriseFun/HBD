@@ -25,7 +25,9 @@
       overflow-x: hidden;
     }
 
-    /* LUEURS FUTURISTES */
+    /* =========================
+       BACKGROUND
+    ========================= */
 
     .glow {
       position: fixed;
@@ -60,7 +62,9 @@
       }
     }
 
-    /* ÉCRANS */
+    /* =========================
+       SCREENS
+    ========================= */
 
     .screen {
       min-height: 100vh;
@@ -85,6 +89,14 @@
       }
     }
 
+    .hidden {
+      display: none;
+    }
+
+    /* =========================
+       TEXT
+    ========================= */
+
     .small {
       font-size: 11px;
       letter-spacing: 5px;
@@ -96,6 +108,7 @@
       font-size: clamp(42px, 14vw, 90px);
       letter-spacing: 8px;
       margin-bottom: 15px;
+
       animation: titleGlow 3s ease-in-out infinite alternate;
     }
 
@@ -118,7 +131,17 @@
       margin-bottom: 40px;
     }
 
-    /* BOUTONS */
+    .message {
+      max-width: 600px;
+      line-height: 1.9;
+      font-size: 16px;
+      opacity: 0.85;
+      margin: 25px 0 40px;
+    }
+
+    /* =========================
+       BUTTONS
+    ========================= */
 
     button {
       padding: 15px 30px;
@@ -139,38 +162,31 @@
       transform: scale(1.05);
     }
 
-    /* BOUTON MUSIQUE */
+    /* =========================
+       MUSIC BUTTON
+    ========================= */
 
     #musicButton {
       position: fixed;
       top: 20px;
       right: 20px;
       z-index: 1000;
+
       width: 45px;
       height: 45px;
+
       padding: 0;
+
       border-radius: 50%;
+
       font-size: 18px;
+
       display: none;
     }
 
-    /* CACHÉ */
-
-    .hidden {
-      display: none;
-    }
-
-    /* MESSAGE */
-
-    .message {
-      max-width: 600px;
-      line-height: 1.9;
-      font-size: 16px;
-      opacity: 0.85;
-      margin: 25px 0 40px;
-    }
-
-    /* GALERIE */
+    /* =========================
+       GALLERY
+    ========================= */
 
     #gallery {
       padding-top: 80px;
@@ -192,25 +208,50 @@
     .gallery {
       width: 100%;
       max-width: 420px;
+
       display: flex;
       flex-direction: column;
+
       gap: 25px;
     }
 
     .photo-card {
       position: relative;
+
       overflow: hidden;
+
       border-radius: 20px;
+
       border: 1px solid rgba(255,255,255,0.15);
+
       background: rgba(255,255,255,0.05);
-      box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+
+      box-shadow:
+        0 15px 50px rgba(0,0,0,0.5);
+
+      animation: photoAppear 1s ease;
+    }
+
+    @keyframes photoAppear {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     .photo-card img {
       display: block;
+
       width: 100%;
       height: 420px;
+
       object-fit: cover;
+
       transition: transform 0.7s ease;
     }
 
@@ -220,80 +261,270 @@
 
     .photo-number {
       position: absolute;
+
       bottom: 15px;
       left: 15px;
+
       padding: 7px 12px;
+
       border-radius: 20px;
+
       background: rgba(0,0,0,0.5);
+
       backdrop-filter: blur(10px);
+
       font-size: 11px;
+
       letter-spacing: 2px;
     }
 
-    /* SURPRISE */
+    /* =========================
+       SURPRISE SYSTEM
+    ========================= */
 
-    .surprise {
+    .surprise-container {
+      width: 100%;
+      max-width: 500px;
+
       margin-top: 30px;
-      font-size: 28px;
-      line-height: 1.6;
-      animation: surpriseAppear 1.5s ease;
     }
 
-    @keyframes surpriseAppear {
+    .loading-text {
+      font-size: 13px;
+
+      letter-spacing: 3px;
+
+      opacity: 0.7;
+
+      margin-bottom: 20px;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 5px;
+
+      background: rgba(255,255,255,0.1);
+
+      border-radius: 10px;
+
+      overflow: hidden;
+
+      margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      width: 0%;
+
+      height: 100%;
+
+      background: white;
+
+      box-shadow:
+        0 0 15px rgba(255,255,255,0.8);
+
+      transition: width 3s ease;
+    }
+
+    .access {
+      font-size: 14px;
+
+      letter-spacing: 4px;
+
+      opacity: 0;
+
+      margin-bottom: 25px;
+    }
+
+    .access.show {
+      animation: accessAppear 1s ease forwards;
+    }
+
+    @keyframes accessAppear {
       from {
         opacity: 0;
-        transform: scale(0.5);
+        transform: translateY(10px);
       }
 
       to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================
+       LICENCE REVEAL
+    ========================= */
+
+    .licence-message {
+      opacity: 0;
+
+      transform: scale(0.7);
+
+      max-width: 500px;
+
+      margin-top: 30px;
+    }
+
+    .licence-message.show {
+      animation: licenceReveal 1.5s ease forwards;
+    }
+
+    @keyframes licenceReveal {
+      0% {
+        opacity: 0;
+        transform: scale(0.7);
+      }
+
+      60% {
+        opacity: 1;
+        transform: scale(1.08);
+      }
+
+      100% {
         opacity: 1;
         transform: scale(1);
       }
     }
 
+    .licence-title {
+      font-size: clamp(25px, 8vw, 42px);
+
+      letter-spacing: 2px;
+
+      line-height: 1.4;
+
+      text-shadow:
+        0 0 15px rgba(255,255,255,0.6),
+        0 0 35px rgba(120,110,255,0.5);
+    }
+
+    .licence-subtitle {
+      font-size: 24px;
+
+      margin-top: 20px;
+
+      letter-spacing: 3px;
+    }
+
+    .personal-message {
+      font-size: 15px;
+
+      line-height: 1.8;
+
+      margin-top: 30px;
+
+      opacity: 0.85;
+    }
+
+    /* =========================
+       CONFETTI
+    ========================= */
+
+    .confetti {
+      position: fixed;
+
+      top: -20px;
+
+      width: 8px;
+      height: 14px;
+
+      z-index: 2000;
+
+      animation:
+        confettiFall 4s linear forwards;
+    }
+
+    @keyframes confettiFall {
+
+      0% {
+        transform:
+          translateY(0)
+          rotate(0deg);
+
+        opacity: 1;
+      }
+
+      100% {
+        transform:
+          translateY(110vh)
+          rotate(720deg);
+
+        opacity: 0;
+      }
+
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
     .footer {
       margin-top: 60px;
+
       font-size: 10px;
+
       opacity: 0.35;
+
       letter-spacing: 2px;
     }
+
   </style>
 </head>
 
+
 <body>
 
-  <!-- LUEURS -->
+
+  <!-- BACKGROUND -->
 
   <div class="glow one"></div>
   <div class="glow two"></div>
 
 
-  <!-- MUSIQUE -->
+  <!-- MUSIC -->
 
   <audio id="backgroundMusic" loop>
-    <source src="audio/birthday.mp3" type="audio/mpeg">
+
+    <source
+      src="audio/birthday.mp3"
+      type="audio/mpeg"
+    >
+
   </audio>
 
-  <button id="musicButton" onclick="toggleMusic()">
+
+  <button
+    id="musicButton"
+    onclick="toggleMusic()"
+  >
     🔊
   </button>
 
 
-  <!-- INTRODUCTION -->
+  <!-- =========================
+       INTRO
+  ========================= -->
 
-  <section class="screen" id="intro">
+  <section
+    class="screen"
+    id="intro"
+  >
 
     <div class="small">
       INITIALIZING EXPERIENCE...
     </div>
 
-    <h1>ALLIANCE</h1>
+    <h1>
+      ALLIANCE
+    </h1>
 
     <div class="subtitle">
       A NEW CHAPTER BEGINS
     </div>
 
-    <button onclick="startExperience()">
+    <button
+      onclick="startExperience()"
+    >
       ENTER EXPERIENCE →
     </button>
 
@@ -304,9 +535,14 @@
   </section>
 
 
-  <!-- ANNIVERSAIRE -->
+  <!-- =========================
+       BIRTHDAY
+  ========================= -->
 
-  <section class="screen hidden" id="birthday">
+  <section
+    class="screen hidden"
+    id="birthday"
+  >
 
     <div class="small">
       TODAY'S SPECIAL TRANSMISSION
@@ -321,22 +557,34 @@
     </div>
 
     <p class="message">
-      Aujourd'hui n'est pas simplement un jour de plus.
+
+      Aujourd'hui n'est pas simplement
+      un jour de plus.
+
       C'est le début d'un nouveau chapitre,
-      rempli de nouvelles expériences, de nouveaux rêves
+      rempli de nouvelles expériences,
+      de nouveaux rêves
       et de magnifiques souvenirs à créer.
+
     </p>
 
-    <button onclick="showGallery()">
+    <button
+      onclick="showGallery()"
+    >
       DISCOVER THE MEMORIES →
     </button>
 
   </section>
 
 
-  <!-- GALERIE -->
+  <!-- =========================
+       GALLERY
+  ========================= -->
 
-  <section class="screen hidden" id="gallery">
+  <section
+    class="screen hidden"
+    id="gallery"
+  >
 
     <div class="small">
       MEMORY ARCHIVE
@@ -350,97 +598,242 @@
       THREE MOMENTS • ONE STORY
     </div>
 
+
     <div class="gallery">
 
-      <div class="photo-card">
-        <img src="images/alliance1.jpg" alt="Alliance — souvenir 1">
-        <div class="photo-number">MEMORY 01</div>
-      </div>
 
       <div class="photo-card">
-        <img src="images/alliance2.jpg" alt="Alliance — souvenir 2">
-        <div class="photo-number">MEMORY 02</div>
+
+        <img
+          src="images/alliance1.jpg"
+          alt="Alliance — souvenir 1"
+        >
+
+        <div class="photo-number">
+          MEMORY 01
+        </div>
+
       </div>
 
+
       <div class="photo-card">
-        <img src="images/alliance3.jpg" alt="Alliance — souvenir 3">
-        <div class="photo-number">MEMORY 03</div>
+
+        <img
+          src="images/alliance2.jpg"
+          alt="Alliance — souvenir 2"
+        >
+
+        <div class="photo-number">
+          MEMORY 02
+        </div>
+
       </div>
+
+
+      <div class="photo-card">
+
+        <img
+          src="images/alliance3.jpg"
+          alt="Alliance — souvenir 3"
+        >
+
+        <div class="photo-number">
+          MEMORY 03
+        </div>
+
+      </div>
+
 
     </div>
 
-    <button onclick="showFinalMessage()" style="margin-top:45px;">
+
+    <button
+      onclick="showFinalMessage()"
+      style="margin-top:45px;"
+    >
       CONTINUE →
     </button>
 
   </section>
 
 
-  <!-- MESSAGE FINAL -->
+  <!-- =========================
+       FINAL MESSAGE
+  ========================= -->
 
-  <section class="screen hidden" id="final">
+  <section
+    class="screen hidden"
+    id="final"
+  >
 
     <div class="small">
       FINAL TRANSMISSION
     </div>
 
-    <h1>FOR YOU</h1>
+    <h1>
+      FOR YOU
+    </h1>
+
 
     <p class="message">
-      Alliance, je te souhaite une magnifique nouvelle année
-      de vie.
+
+      Alliance, je te souhaite une magnifique
+      nouvelle année de vie.
 
       <br><br>
 
-      Que chaque nouvelle étape t'apporte de belles
-      surprises, de la réussite et surtout beaucoup de bonheur.
+      Que chaque nouvelle étape t'apporte
+      de belles surprises, de la réussite
+      et surtout beaucoup de bonheur.
 
       <br><br>
 
-      Continue de briller, de rêver et d'avancer.
+      Continue de briller, de rêver
+      et d'avancer.
+
+      <br><br>
+
       Le meilleur reste encore à venir. ❤️
+
     </p>
 
-    <button onclick="showSurprise()">
+
+    <button
+      id="surpriseButton"
+      onclick="startSurprise()"
+    >
       UNLOCK YOUR SURPRISE 🎁
     </button>
 
-    <div id="surprise" class="hidden surprise">
 
-      ✨ 🎂 ✨
+    <!-- SURPRISE -->
 
-      <br><br>
+    <div
+      id="surpriseContainer"
+      class="surprise-container hidden"
+    >
 
-      <strong>
-        THE BEST IS YET TO COME.
-      </strong>
+      <div
+        id="loadingText"
+        class="loading-text"
+      >
+        ACCESSING PERSONAL MESSAGE...
+      </div>
+
+
+      <div class="progress-container">
+
+        <div
+          id="progressBar"
+          class="progress-bar"
+        ></div>
+
+      </div>
+
+
+      <div
+        id="access"
+        class="access"
+      >
+        ACCESS GRANTED ✓
+      </div>
+
+
+      <div
+        id="licenceMessage"
+        class="licence-message"
+      >
+
+        <div class="licence-title">
+
+          ✨ J'ai obtenu ma
+          <br>
+
+          <strong>L.I.C.E.N.C.E 😌</strong>
+
+        </div>
+
+
+        <div class="licence-subtitle">
+
+          🎉🥳🎉 YOUHOU !
+
+        </div>
+
+
+        <div class="licence-subtitle">
+
+          🥂😎🥲 ✨
+
+        </div>
+
+
+        <p class="personal-message">
+
+          Et je voulais que tu sois
+          <strong>la première personne</strong>
+          à le savoir. ❤️
+
+        </p>
+
+      </div>
 
     </div>
+
 
   </section>
 
 
   <script>
 
-    const music = document.getElementById("backgroundMusic");
-    const musicButton = document.getElementById("musicButton");
+
+    /* =========================
+       MUSIC
+    ========================= */
+
+    const music =
+      document.getElementById(
+        "backgroundMusic"
+      );
+
+    const musicButton =
+      document.getElementById(
+        "musicButton"
+      );
 
 
     function startExperience() {
 
-      document.getElementById("intro").classList.add("hidden");
+      document
+        .getElementById("intro")
+        .classList
+        .add("hidden");
 
-      document.getElementById("birthday").classList.remove("hidden");
 
-      musicButton.style.display = "block";
+      document
+        .getElementById("birthday")
+        .classList
+        .remove("hidden");
+
+
+      musicButton.style.display =
+        "block";
+
 
       music.volume = 0.35;
 
+
       music.play().catch(() => {
-        console.log("La lecture automatique a été bloquée.");
+
+        console.log(
+          "La lecture automatique a été bloquée."
+        );
+
       });
 
+
       window.scrollTo(0, 0);
+
     }
 
 
@@ -450,24 +843,39 @@
 
         music.play();
 
-        musicButton.innerHTML = "🔊";
+        musicButton.innerHTML =
+          "🔊";
 
       } else {
 
         music.pause();
 
-        musicButton.innerHTML = "🔇";
+        musicButton.innerHTML =
+          "🔇";
 
       }
 
     }
 
 
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+
     function showGallery() {
 
-      document.getElementById("birthday").classList.add("hidden");
+      document
+        .getElementById("birthday")
+        .classList
+        .add("hidden");
 
-      document.getElementById("gallery").classList.remove("hidden");
+
+      document
+        .getElementById("gallery")
+        .classList
+        .remove("hidden");
+
 
       window.scrollTo(0, 0);
 
@@ -476,22 +884,177 @@
 
     function showFinalMessage() {
 
-      document.getElementById("gallery").classList.add("hidden");
+      document
+        .getElementById("gallery")
+        .classList
+        .add("hidden");
 
-      document.getElementById("final").classList.remove("hidden");
+
+      document
+        .getElementById("final")
+        .classList
+        .remove("hidden");
+
 
       window.scrollTo(0, 0);
 
     }
 
 
-    function showSurprise() {
+    /* =========================
+       SURPRISE
+    ========================= */
 
-      document.getElementById("surprise").classList.remove("hidden");
+
+    function startSurprise() {
+
+
+      const button =
+        document.getElementById(
+          "surpriseButton"
+        );
+
+
+      const container =
+        document.getElementById(
+          "surpriseContainer"
+        );
+
+
+      const progress =
+        document.getElementById(
+          "progressBar"
+        );
+
+
+      const access =
+        document.getElementById(
+          "access"
+        );
+
+
+      const message =
+        document.getElementById(
+          "licenceMessage"
+        );
+
+
+      button.style.display =
+        "none";
+
+
+      container.classList.remove(
+        "hidden"
+      );
+
+
+      setTimeout(() => {
+
+        progress.style.width =
+          "100%";
+
+      }, 100);
+
+
+      setTimeout(() => {
+
+        access.classList.add(
+          "show"
+        );
+
+      }, 3200);
+
+
+      setTimeout(() => {
+
+        message.classList.add(
+          "show"
+        );
+
+        createConfetti();
+
+      }, 4200);
 
     }
 
+
+    /* =========================
+       CONFETTI
+    ========================= */
+
+
+    function createConfetti() {
+
+
+      const pieces = 80;
+
+
+      for (
+        let i = 0;
+        i < pieces;
+        i++
+      ) {
+
+
+        const confetti =
+          document.createElement(
+            "div"
+          );
+
+
+        confetti.classList.add(
+          "confetti"
+        );
+
+
+        confetti.style.left =
+          Math.random() * 100 + "%";
+
+
+        confetti.style.animationDelay =
+          Math.random() * 2 + "s";
+
+
+        confetti.style.transform =
+          `rotate(${Math.random() * 360}deg)`;
+
+
+        const colors = [
+          "#ffffff",
+          "#8c82ff",
+          "#ffd166",
+          "#ff6b9d",
+          "#70e1f5"
+        ];
+
+
+        confetti.style.background =
+          colors[
+            Math.floor(
+              Math.random() *
+              colors.length
+            )
+          ];
+
+
+        document.body.appendChild(
+          confetti
+        );
+
+
+        setTimeout(() => {
+
+          confetti.remove();
+
+        }, 6000);
+
+      }
+
+    }
+
+
   </script>
+
 
 </body>
 </html>
